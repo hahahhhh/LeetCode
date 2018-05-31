@@ -1,12 +1,13 @@
 class Solution {
     public int reverse(int x) {
-        if (x == -2147483648) return 0;
-        int k = (int) log10(Math.abs(x)) + 1;
         long a = 0;
-        for (int i = k; i > 0; i--) {
+        boolean negative = x<0;
+        if (negative) x=-x;
+        while(x>0){
             a = x % 10 + a * 10;
             x /= 10;
         }
+        if(negative) a=-a;
         if (a > Integer.MAX_VALUE || a < Integer.MIN_VALUE) return 0;
         return (int) a;
     }
