@@ -1,33 +1,61 @@
 class Solution {
     public int romanToInt(String s) {
-        if(s == null || s.length() < 1)
-            return -1;
-        char[] ch = s.toCharArray();
-        HashMap<Character, Integer> hm = new HashMap<Character, Integer>();
-        hm.put('I', 1);
-        hm.put('V', 5);
-        hm.put('X', 10);
-        hm.put('L', 50);
-        hm.put('C', 100);
-        hm.put('D', 500);
-        hm.put('M', 1000);
-        int res = 0;
-        int temp = 0; // 临时变量，保存的是当前遍历的上一个数值的值
-        int value = 0; // 当前罗马值的大小
-        for(int i = ch.length - 1; i >= 0; i--)
-        {
-            value = hm.get(ch[i]);
-            if(temp <= value)  // 左加
-            {
-                res += value;
-                temp = value;
-            }
-            else    // 右减
-            {
-                res -= value;
-                temp = value;
+        
+        int value = 0;
+        int temp = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            switch (s.charAt(i)) {
+                case 'I':
+                    if (temp <= 1)
+                        value += 1;
+                    else
+                        value -= 1;
+                    temp = 1;
+                    break;
+                case 'V':
+                    if(temp<=5)
+                        value+=5;
+                    else
+                        value-=5;
+                    temp=5;
+                    break;
+                case 'X':
+                    if (temp<=10)
+                        value+=10;
+                    else
+                        value-=10;
+                    temp=10;
+                    break;
+                case 'L':
+                    if (temp<=50)
+                        value+=50;
+                    else
+                        value-=50;
+                    temp=50;
+                    break;
+                case 'C':
+                    if (temp<=100)
+                        value+=100;
+                    else
+                        value-=100;
+                    temp=100;
+                    break;
+                case 'D':
+                    if (temp<=500)
+                        value+=500;
+                    else
+                        value-=500;
+                    temp=500;
+                    break;
+                case 'M':
+                    if (temp<=1000)
+                        value+=1000;
+                    else
+                        value-=1000;
+                    temp=1000;
+                    break;
             }
         }
-        return res;
+        return value;
     }
 }
